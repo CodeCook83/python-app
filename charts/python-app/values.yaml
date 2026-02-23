@@ -3,7 +3,8 @@ image:
   repository: codecook83/python-app
   pullPolicy: IfNotPresent
   tag: e59bc5
-imagePullSecrets: []
+imagePullSecrets:
+  - name: dockerhub-secret
 nameOverride: ""
 fullnameOverride: ""
 podAnnotations: {}
