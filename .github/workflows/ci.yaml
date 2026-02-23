@@ -1,14 +1,17 @@
 name: cicd
+
 on:
   push:
     paths:
       - src/**
     branches:
       - main
+
 jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
+
       - name: Shorten commit id
         shell: bash
         run: |
@@ -27,6 +30,7 @@ jobs:
           tags: codecook83/python-app:${{ env.COMMIT_ID }}
     outputs: 
       commit_id: ${{ env.COMMIT_ID }}
+  
   cd:
     needs: ci
     runs-on: self-hosted
@@ -53,19 +57,9 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          message: 'Updated values.yaml with commit ${{needs.ci.outputs.commit_id}}'
-      - name: Create DockerHub ImagePullSecret
-        run: |
-          kubectl create namespace python --dry-run=client -o yaml | kubectl apply -f -
+          message: 'Updates values.yaml with commit ${{needs.ci.outputs.commit_id}}'
 
-          kubectl create secret docker-registry dockerhub-secret \
-            --docker-server=https://index.docker.io/v1/ \
-            --docker-username=${{ secrets.DOCKERHUB_USERNAME }} \
-            --docker-password=${{ secrets.DOCKERHUB_TOKEN }} \
-            --namespace=python \
-            --dry-run=client -o yaml | kubectl apply -f -
-            
-      - name: Install ArgoCD
+      - name: Install argocd
         shell: bash
         run: |
           curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-arm64
