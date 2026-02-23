@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: codecook83/python-app
   pullPolicy: IfNotPresent
-  tag: '928736'
+  tag: 'f2fc7b'
 imagePullSecrets:
   - name: dockerhub-cred
 nameOverride: ""
