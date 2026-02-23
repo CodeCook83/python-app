@@ -3,16 +3,15 @@ image:
   repository: codecook83/python-app
   pullPolicy: IfNotPresent
   tag: ea0b5e
-imagePullSecrets: []
+imagePullSecrets:
+  - name: dockerhub-cred
 nameOverride: ""
 fullnameOverride: ""
 podAnnotations: {}
 podLabels: {}
 serviceAccount:
-  create: false
-  automount: true
-  annotations: {}
-  name: ""
+  create: true
+  name: python-sa
 podSecurityContext: {}
 securityContext: {}
 service:
