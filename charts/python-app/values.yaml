@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: codecook83/python-app
   pullPolicy: IfNotPresent
-  tag: b27cd6
+  tag: ea0b5e
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
